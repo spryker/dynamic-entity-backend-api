@@ -226,6 +226,7 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
         }
 
         // Add constraint information if available
+        /** @phpstan-ignore notIdentical.alwaysTrue */
         if ($dynamicEntityFieldValidationTransfer->getConstraints() !== null && $dynamicEntityFieldValidationTransfer->getConstraints()->count() > 0) {
             $constraints = [];
 
