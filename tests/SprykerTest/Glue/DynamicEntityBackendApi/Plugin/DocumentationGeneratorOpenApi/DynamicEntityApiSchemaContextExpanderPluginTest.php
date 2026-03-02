@@ -61,9 +61,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testExpandReturnsEmptyTransfer(): void
     {
         // Arrange
@@ -77,9 +74,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
         $this->assertSame($apiApplicationSchemaContextTransfer, $newApiApplicationSchemaContextTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testExpandExpandsDynamicEntityConfigurationsItems(): void
     {
         // Arrange
@@ -111,9 +105,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
         $this->assertSame(static::RESOURCE_NAME_2, $copyArrayDynamicEntityConfigurations[1]->getTableAlias());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandExpandsDynamicEntityConfigurationsItemsWithChildRelations(): void
     {
         // Arrange
@@ -169,9 +160,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
         $this->assertCount(0, $copyArrayDynamicEntityConfigurations[1]->getChildRelations());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandNotExpandsDynamicEntityConfigurationsItems(): void
     {
         // Arrange
@@ -195,9 +183,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
         $this->assertCount(0, $newApiApplicationSchemaContextTransfer->getDynamicEntityConfigurations());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandFiltersDynamicEntityControllerRouter(): void
     {
         // Arrange
@@ -231,9 +216,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
         $this->assertSame($customRoutesContextTransfer, $customRoutesContexts[1]);
     }
 
-    /**
-     * @return void
-     */
     public function testExpandNotFiltersDynamicEntityControllerRouter(): void
     {
         // Arrange
@@ -268,9 +250,6 @@ class DynamicEntityApiSchemaContextExpanderPluginTest extends Unit
         $this->assertSame($customRoutesContextTransfer, $customRoutesContexts[1]);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Plugin\DocumentationGeneratorApi\DynamicEntityApiSchemaContextExpanderPlugin
-     */
     protected function createDynamicEntityApiSchemaContextExpanderPlugin(): DynamicEntityApiSchemaContextExpanderPlugin
     {
         return new DynamicEntityApiSchemaContextExpanderPlugin();

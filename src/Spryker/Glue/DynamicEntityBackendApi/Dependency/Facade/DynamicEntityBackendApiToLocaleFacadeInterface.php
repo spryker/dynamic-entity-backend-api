@@ -9,8 +9,5 @@ namespace Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade;
 
 interface DynamicEntityBackendApiToLocaleFacadeInterface
 {
-    /**
-     * @return string
-     */
     public function getCurrentLocaleName(): string;
 }

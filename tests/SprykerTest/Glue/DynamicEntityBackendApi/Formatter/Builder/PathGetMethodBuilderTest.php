@@ -43,9 +43,6 @@ class PathGetMethodBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithRoutePrefix(): void
     {
         // Arrange
@@ -66,9 +63,6 @@ class PathGetMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedGetPathDataWithRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithOneChildRelation(): void
     {
         // Arrange
@@ -89,9 +83,6 @@ class PathGetMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedGetPathDataWithChildRelation.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithChildRelations(): void
     {
         // Arrange
@@ -112,9 +103,6 @@ class PathGetMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedGetPathDataWithChildRelations.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithChildRelationsTree(): void
     {
         // Arrange
@@ -135,9 +123,6 @@ class PathGetMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedGetPathDataWithChildRelationsTree.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithoutRoutePrefix(): void
     {
         // Arrange
@@ -157,9 +142,6 @@ class PathGetMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedGetPathDataWithoutRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsNullValueException(): void
     {
         // Assert
@@ -179,9 +161,6 @@ class PathGetMethodBuilderTest extends Unit
         $builder->buildPathData(new DynamicEntityConfigurationTransfer());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataWithChildRelationsThrowsNullValueException(): void
     {
         // Assert
@@ -204,9 +183,6 @@ class PathGetMethodBuilderTest extends Unit
         ));
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsMissingFieldDefinitionException(): void
     {
         // Assert

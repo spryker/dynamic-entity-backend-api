@@ -12,19 +12,8 @@ use Generated\Shared\Transfer\GlueResponseTransfer;
 
 interface DynamicEntityReaderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     public function getDynamicEntityCollection(GlueRequestTransfer $glueRequestTransfer): GlueResponseTransfer;
 
-    /**
-     * @param string $id
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     public function getDynamicEntity(
         string $id,
         GlueRequestTransfer $glueRequestTransfer

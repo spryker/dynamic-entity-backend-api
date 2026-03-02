@@ -101,10 +101,6 @@ class RouteBuilder implements RouteBuilderInterface
      */
     protected DynamicEntityBackendApiConfig $config;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade
-     * @param \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig $config
-     */
     public function __construct(
         DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade,
         DynamicEntityBackendApiConfig $config
@@ -113,11 +109,6 @@ class RouteBuilder implements RouteBuilderInterface
         $this->config = $config;
     }
 
-    /**
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     public function buildRouteCollection(RouteCollection $routeCollection): RouteCollection
     {
         $dynamicEntityConfigurationCollectionTransfer = $this->dynamicEntityFacade->getDynamicEntityConfigurationCollection(
@@ -139,13 +130,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param string $action
-     * @param string $method
-     * @param string $path
-     *
-     * @return \Symfony\Component\Routing\Route
-     */
     protected function buildRoute(string $action, string $method, string $path): Route
     {
         $route = new Route($path);
@@ -157,12 +141,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $route;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForGetCollection(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -181,12 +159,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForGet(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -205,12 +177,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForPost(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -229,12 +195,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForPatch(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -253,12 +213,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForPatchCollection(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -277,12 +231,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForPutCollection(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -301,12 +249,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForPut(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -325,12 +267,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForDeleteCollection(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -349,12 +285,6 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function addDynamicEntityRouteForDelete(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         RouteCollection $routeCollection
@@ -373,32 +303,16 @@ class RouteBuilder implements RouteBuilderInterface
         return $routeCollection;
     }
 
-    /**
-     * @param string $placeholder
-     * @param string $tableAlias
-     *
-     * @return string
-     */
     protected function formatPath(string $placeholder, string $tableAlias): string
     {
         return sprintf($placeholder, $this->config->getRoutePrefix(), $tableAlias);
     }
 
-    /**
-     * @param string $placeholder
-     * @param string $tableAlias
-     * @param string|null $method
-     *
-     * @return string
-     */
     protected function formatName(string $placeholder, string $tableAlias, ?string $method = null): string
     {
         return sprintf($placeholder, $tableAlias, $method);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationCriteriaTransfer
-     */
     protected function createDynamicEntityConfigurationCriteriaTransfer(): DynamicEntityConfigurationCriteriaTransfer
     {
         $dynamicEntityConfigurationCriteriaTransfer = new DynamicEntityConfigurationCriteriaTransfer();

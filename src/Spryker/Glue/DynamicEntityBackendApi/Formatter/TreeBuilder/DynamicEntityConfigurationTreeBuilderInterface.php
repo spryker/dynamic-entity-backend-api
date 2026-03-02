@@ -11,12 +11,6 @@ use Generated\Shared\Transfer\DynamicEntityConfigurationTransfer;
 
 interface DynamicEntityConfigurationTreeBuilderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     * @param int|null $deepLevel
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function buildDynamicEntityConfigurationTransferTree(
         DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
         ?int $deepLevel = null

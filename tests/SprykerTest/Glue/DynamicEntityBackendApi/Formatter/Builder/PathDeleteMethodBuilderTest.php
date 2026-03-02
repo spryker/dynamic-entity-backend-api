@@ -41,9 +41,6 @@ class PathDeleteMethodBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithRoutePrefix(): void
     {
         // Arrange
@@ -65,9 +62,6 @@ class PathDeleteMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedDeletePathDataWithRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithoutRoutePrefix(): void
     {
         // Arrange
@@ -88,9 +82,6 @@ class PathDeleteMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedDeletePathDataWithoutRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsNullValueException(): void
     {
         // Assert

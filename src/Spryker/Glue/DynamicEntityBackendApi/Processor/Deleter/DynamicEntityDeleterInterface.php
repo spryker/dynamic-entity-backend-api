@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\GlueResponseTransfer;
 
 interface DynamicEntityDeleterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     public function deleteDynamicEntity(GlueRequestTransfer $glueRequestTransfer): GlueResponseTransfer;
 }

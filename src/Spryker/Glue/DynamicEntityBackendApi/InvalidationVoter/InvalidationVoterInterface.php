@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\DocumentationInvalidationVoterRequestTransfer;
 
 interface InvalidationVoterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DocumentationInvalidationVoterRequestTransfer $documentationInvalidationVoterRequestTransfer
-     *
-     * @return bool
-     */
     public function isInvalidated(DocumentationInvalidationVoterRequestTransfer $documentationInvalidationVoterRequestTransfer): bool;
 }

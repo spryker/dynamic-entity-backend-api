@@ -102,9 +102,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
      */
     protected $controller;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -113,9 +110,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->tester->setupStorageRedisConfig();
     }
 
-    /**
-     * @return void
-     */
     public function testGetCollectionActionReturnsCollection(): void
     {
         //Arrange
@@ -137,9 +131,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::FOO_TABLE_ALIAS, $content[static::RESPONSE_KEY_DATA][0][$this->tester::TABLE_ALIAS_COLUMN]);
     }
 
-    /**
-     * @return void
-     */
     public function testGetCollectionActionReturnsEmptyCollectionIfTableAliasIsNotValid(): void
     {
         //Arrange
@@ -157,9 +148,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertSame(static::RESPONSE_CODE_ALIAS_IS_WRONG, $errors[0]->getCode());
     }
 
-    /**
-     * @return void
-     */
     public function testGetActionReturnsEntityById(): void
     {
         //Arrange
@@ -175,9 +163,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::FOO_TABLE_ALIAS, $content[static::RESPONSE_KEY_DATA][0][$this->tester::TABLE_ALIAS_COLUMN]);
     }
 
-    /**
-     * @return void
-     */
     public function testPostActionSavesAndReturnsCollection(): void
     {
         //Arrange
@@ -209,9 +194,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertNotNull($barEntity);
     }
 
-    /**
-     * @return void
-     */
     public function testPostActionReturnsErrorIfContentIsNotProvided(): void
     {
         //Arrange
@@ -226,9 +208,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPostActionReturnsErrorIfNotCreatableFieldIsProvided(): void
     {
         //Arrange
@@ -254,9 +233,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPostActionCreatesIfValidAndReturnsErrorIfInvalidDataIsProvidedInNonTransactionalMode(): void
     {
         //Arrange
@@ -299,9 +275,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertCount(1, $data);
     }
 
-    /**
-     * @return void
-     */
     public function testPostActionReturnsErrorIfNotCreatableFieldIsProvidedInNonTransactionalMode(): void
     {
         //Arrange
@@ -335,9 +308,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $errors[0][static::RESPONSE_KEY_STATUS]);
     }
 
-    /**
-     * @return void
-     */
     public function testPatchActionUpdatesCollection(): void
     {
         //Arrange
@@ -365,9 +335,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::DEFINITION_UPDATED_VALUE, $fooEntity->getDefinition());
     }
 
-    /**
-     * @return void
-     */
     public function testPatchActionReturnsErrorForCollectionIfIdIsNotProvided(): void
     {
         //Arrange
@@ -392,9 +359,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPatchActionReturnsErrorForCollectionIfIdDoesNotExist(): void
     {
         //Arrange
@@ -419,9 +383,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_NOT_FOUND, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPatchActionUpdatesById(): void
     {
         //Arrange
@@ -447,9 +408,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::DEFINITION_UPDATED_VALUE, $fooEntity->getDefinition());
     }
 
-    /**
-     * @return void
-     */
     public function testPatchActionDoesNotUpdateIfContentIsNotValid(): void
     {
         //Arrange
@@ -474,9 +432,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPatchActionByIdReturnsErrorIfContentIsNotValid(): void
     {
         //Arrange
@@ -500,9 +455,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionUpdatesCollection(): void
     {
         //Arrange
@@ -535,9 +487,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::DEFINITION_UPDATED_VALUE, $updatedFooEntity->getDefinition());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionCreatesCollectionIfIdIsNotFound(): void
     {
         //Arrange
@@ -569,9 +518,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::DEFINITION_CREATED_VALUE, $barEntity->getDefinition());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionUpdatesById(): void
     {
         //Arrange
@@ -603,9 +549,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::DEFINITION_UPDATED_VALUE, $updatedFooEntity->getDefinition());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionUpdateByIdFailsIfIdIsProvidedInRequestBody(): void
     {
         //Arrange
@@ -632,9 +575,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionCreatesById(): void
     {
         //Arrange
@@ -664,9 +604,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals($this->tester::DEFINITION_CREATED_VALUE, $barEntity->getDefinition());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionCreateByIdFailsIfIdIsProvidedInRequestBody(): void
     {
         //Arrange
@@ -693,9 +630,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @return void
-     */
     public function testPutActionCreateByIdFailsIfIdIsNotCreatable(): void
     {
         //Arrange
@@ -722,12 +656,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $glueResponseTransfer->getErrors()[0]->getStatus());
     }
 
-    /**
-     * @param string|null $definition
-     * @param string|null $tableAlias
-     *
-     * @return void
-     */
     protected function createFooEntity(?string $definition = null, ?string $tableAlias = null): void
     {
         $tableAlias = $tableAlias ?? $this->tester::FOO_TABLE_ALIAS;
@@ -739,11 +667,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
             ->save();
     }
 
-    /**
-     * @param string $tableAlias
-     *
-     * @return \Orm\Zed\DynamicEntity\Persistence\SpyDynamicEntityConfiguration|null
-     */
     protected function findEntityByTableAlias(string $tableAlias): ?SpyDynamicEntityConfiguration
     {
         return SpyDynamicEntityConfigurationQuery::create()
@@ -751,11 +674,6 @@ class DynamicEntityBackendApiControllerTest extends Unit
             ->findOne();
     }
 
-    /**
-     * @param string $definition
-     *
-     * @return \Orm\Zed\DynamicEntity\Persistence\SpyDynamicEntityConfiguration|null
-     */
     protected function findEntityByDefinition(string $definition): ?SpyDynamicEntityConfiguration
     {
         return SpyDynamicEntityConfigurationQuery::create()

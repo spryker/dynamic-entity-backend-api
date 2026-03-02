@@ -162,11 +162,6 @@ class DynamicEntityBackendApiTester extends Actor
      */
     protected const STRING_FALSE = 'false';
 
-    /**
-     * @param string|null $tableAlias
-     *
-     * @return \Generated\Shared\Transfer\GlueRequestTransfer
-     */
     public function haveGlueRequestTransfer(?string $tableAlias = null): GlueRequestTransfer
     {
         $glueRequestTransfer = new GlueRequestTransfer();
@@ -180,13 +175,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $glueRequestTransfer;
     }
 
-    /**
-     * @param bool $isCreatable
-     * @param bool $isRequired
-     * @param bool $isEditable
-     *
-     * @return string
-     */
     public function buildDefinitionWithNonAutoIncrementedId(
         bool $isCreatable = true,
         bool $isRequired = false,
@@ -200,13 +188,6 @@ class DynamicEntityBackendApiTester extends Actor
         return json_encode($definitions);
     }
 
-    /**
-     * @param bool $isCreatable
-     * @param bool $isRequired
-     * @param bool $isEditable
-     *
-     * @return string
-     */
     public function buildDefinitionWithAutoIncrementedId(
         bool $isCreatable = true,
         bool $isRequired = false,
@@ -220,13 +201,6 @@ class DynamicEntityBackendApiTester extends Actor
         return json_encode($definitions);
     }
 
-    /**
-     * @param bool $isCreatable
-     * @param bool $isRequired
-     * @param bool $isEditable
-     *
-     * @return array
-     */
     protected function getDynamicEntityDefinitionFields(
         bool $isCreatable = true,
         bool $isRequired = false,
@@ -276,9 +250,6 @@ class DynamicEntityBackendApiTester extends Actor
         ];
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function createDynamicEntityConfigurationTransfer(): DynamicEntityConfigurationTransfer
     {
         $dynamicEntityFieldDefinitionTransfer = (new DynamicEntityFieldDefinitionTransfer())->setFieldName('test-field-name');
@@ -303,9 +274,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $dynamicEntityConfigurationTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function createDynamicEntityConfigurationTransferWithEmptyFieldDefinitions(): DynamicEntityConfigurationTransfer
     {
         $dynamicEntityDefinitionTransfer = new DynamicEntityDefinitionTransfer();
@@ -321,9 +289,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $dynamicEntityConfigurationTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function createDynamicEntityConfigurationTransferWithChildRelation(): DynamicEntityConfigurationTransfer
     {
         $dynamicEntityFieldDefinitionTransfer = $this->createDynamicEntityConfigurationTransfer();
@@ -339,11 +304,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $dynamicEntityFieldDefinitionTransfer;
     }
 
-    /**
-     * @param int $numberRelations
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function createDynamicEntityConfigurationTransferWithChildRelations(int $numberRelations = 3): DynamicEntityConfigurationTransfer
     {
         $dynamicEntityFieldDefinitionTransfer = $this->createDynamicEntityConfigurationTransfer();
@@ -361,9 +321,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $dynamicEntityFieldDefinitionTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function createDynamicEntityConfigurationTransferWithChildRelationsTree(): DynamicEntityConfigurationTransfer
     {
         $dynamicEntityFieldDefinitionTransfer = $this->createDynamicEntityConfigurationTransfer();
@@ -390,9 +347,6 @@ class DynamicEntityBackendApiTester extends Actor
         return require codecept_data_dir() . 'Builder' . DIRECTORY_SEPARATOR . $methodName . DIRECTORY_SEPARATOR . $fileName;
     }
 
-    /**
-     * @return void
-     */
     public function setupStorageRedisConfig(): void
     {
         $this->setConfig(StorageConstants::STORAGE_REDIS_PROTOCOL, Config::get(static::REDIS_SCHEME, false));
@@ -402,25 +356,16 @@ class DynamicEntityBackendApiTester extends Actor
         $this->setConfig(StorageConstants::STORAGE_REDIS_PASSWORD, Config::get(static::REDIS_PASSWORD));
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\TreeBuilder\DynamicEntityConfigurationTreeBuilderInterface
-     */
     public function createDynamicEntityConfigurationTreeBuilder(): DynamicEntityConfigurationTreeBuilderInterface
     {
         return new DynamicEntityConfigurationTreeBuilder();
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\SchemaBuilderInterface
-     */
     public function createSchemaBuilder(): SchemaBuilderInterface
     {
         return new SchemaBuilder();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer
-     */
     public function createDynamicEntityConfigurationTransferWithThreeLevels(): DynamicEntityConfigurationTransfer
     {
         $rootDynamicEntityConfigurationTransfer = $this->createDynamicEntityConfigurationTransfer();
@@ -447,11 +392,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $rootDynamicEntityConfigurationTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueRequestTransfer
-     */
     public function addNonTransactionalHeaderToRequestTransfer(GlueRequestTransfer $glueRequestTransfer): GlueRequestTransfer
     {
         $factory = new DynamicEntityBackendApiFactory();
@@ -462,11 +402,6 @@ class DynamicEntityBackendApiTester extends Actor
         return $glueRequestTransfer;
     }
 
-    /**
-     * @param string|null $tableAlias
-     *
-     * @return string
-     */
     protected function getPath(?string $tableAlias = null): string
     {
         return sprintf(

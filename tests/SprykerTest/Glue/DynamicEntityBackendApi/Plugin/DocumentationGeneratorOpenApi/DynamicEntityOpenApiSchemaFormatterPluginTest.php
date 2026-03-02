@@ -35,9 +35,6 @@ class DynamicEntityOpenApiSchemaFormatterPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testFormatFormatsWhenDynamicEntityConfigurationsNotDefined(): void
     {
         // Arrange
@@ -54,9 +51,6 @@ class DynamicEntityOpenApiSchemaFormatterPluginTest extends Unit
         $this->assertSame([], $formattedData);
     }
 
-    /**
-     * @return void
-     */
     public function testFormatFormatsWhenDynamicEntityConfigurationsNotValid(): void
     {
         // Arrange
@@ -88,9 +82,6 @@ class DynamicEntityOpenApiSchemaFormatterPluginTest extends Unit
         $this->assertEquals($this->getExpectedFormattedData(), $formattedData);
     }
 
-    /**
-     * @return void
-     */
     public function testFormatFormatsWhenDynamicEntityConfigurationsValid(): void
     {
         // Arrange
@@ -195,9 +186,6 @@ class DynamicEntityOpenApiSchemaFormatterPluginTest extends Unit
         ];
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ApiApplicationSchemaContextTransfer
-     */
     protected function createApiApplicationSchemaContextTransfer(): ApiApplicationSchemaContextTransfer
     {
         $dynamicEntityDefinitionTransfer = new DynamicEntityDefinitionTransfer();

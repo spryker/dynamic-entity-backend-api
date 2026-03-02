@@ -42,9 +42,6 @@ class PathPutMethodBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithRoutePrefix(): void
     {
         // Arrange
@@ -66,9 +63,6 @@ class PathPutMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPutPathDataWithRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithOneChildRelation(): void
     {
         // Arrange
@@ -90,9 +84,6 @@ class PathPutMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPutPathDataWithChildRelation.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithChildRelations(): void
     {
         // Arrange
@@ -114,9 +105,6 @@ class PathPutMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPutPathDataWithChildRelations.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithOneChildRelationsTree(): void
     {
         // Arrange
@@ -138,9 +126,6 @@ class PathPutMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPutPathDataWithChildRelationsTree.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsNullValueException(): void
     {
         // Assert
@@ -160,9 +145,6 @@ class PathPutMethodBuilderTest extends Unit
         $builder->buildPathData(new DynamicEntityConfigurationTransfer());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithoutRoutePrefix(): void
     {
         // Arrange
@@ -183,9 +165,6 @@ class PathPutMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPutPathDataWithoutRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsMissingFieldDefinitionException(): void
     {
         // Assert

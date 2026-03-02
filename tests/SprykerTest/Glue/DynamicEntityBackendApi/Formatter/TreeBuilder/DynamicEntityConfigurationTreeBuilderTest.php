@@ -28,9 +28,6 @@ class DynamicEntityConfigurationTreeBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildDynamicEntityConfigurationTransferByDeepLevelReturnsDynamicEntityConfigurationTransfer(): void
     {
         // Arrange
@@ -45,9 +42,6 @@ class DynamicEntityConfigurationTreeBuilderTest extends Unit
         $this->assertCount(0, $dynamicEntityConfigurationTransfer->getChildRelations());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildDynamicEntityConfigurationTransferByDeepLevelReturnsDynamicEntityConfigurationTransferWithChildEntityConfiguration(): void
     {
         // Arrange
@@ -63,9 +57,6 @@ class DynamicEntityConfigurationTreeBuilderTest extends Unit
         $this->assertEquals('test-first-level-child-relation', $dynamicEntityConfigurationTransfer->getChildRelations()[0]->getName());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildDynamicEntityConfigurationTransferByDeepLevelReturnsDynamicEntityConfigurationTransferWithChildEntityConfigurations(): void
     {
         // Arrange
@@ -80,9 +71,6 @@ class DynamicEntityConfigurationTreeBuilderTest extends Unit
         $this->assertCount(5, $dynamicEntityConfigurationTransfer->getChildRelations());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildDynamicEntityConfigurationTransferByDeepLevelReturnsDynamicEntityConfigurationTransferWithTreeChildEntityConfigurations(): void
     {
         // Arrange
@@ -114,9 +102,6 @@ class DynamicEntityConfigurationTreeBuilderTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testBuildDynamicEntityConfigurationTransferByDeepLevelReturnsDynamicEntityConfigurationTransferWithTreeChildEntityConfigurationsToSecondLevel(): void
     {
         // Arrange
@@ -137,9 +122,6 @@ class DynamicEntityConfigurationTreeBuilderTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testBuildDynamicEntityConfigurationTransferByDeepLevelReturnsDynamicEntityConfigurationTransferWithTreeChildEntityConfigurationsToFirstLevel(): void
     {
         // Arrange

@@ -63,19 +63,11 @@ class DynamicEntityBackendApiLogger implements DynamicEntityBackendApiLoggerInte
      */
     protected ?LoggerInterface $logger;
 
-    /**
-     * @param \Psr\Log\LoggerInterface|null $logger
-     */
     public function __construct(?LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return void
-     */
     public function logInfo(GlueRequestTransfer $glueRequestTransfer): void
     {
         if ($this->logger === null) {
@@ -87,12 +79,6 @@ class DynamicEntityBackendApiLogger implements DynamicEntityBackendApiLoggerInte
         $this->logger->info($message);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     * @param \Exception $exception
-     *
-     * @return void
-     */
     public function logError(GlueRequestTransfer $glueRequestTransfer, Exception $exception): void
     {
         if ($this->logger === null) {
@@ -104,13 +90,6 @@ class DynamicEntityBackendApiLogger implements DynamicEntityBackendApiLoggerInte
         $this->logger->error($message, [static::PAYLOAD_CONTEXT => $glueRequestTransfer->getAttributes()]);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     * @param string $messagePlaceholder
-     * @param string|null $message
-     *
-     * @return string
-     */
     protected function buildLogMessage(
         GlueRequestTransfer $glueRequestTransfer,
         string $messagePlaceholder,
@@ -127,11 +106,6 @@ class DynamicEntityBackendApiLogger implements DynamicEntityBackendApiLoggerInte
         );
     }
 
-    /**
-     * @param \Exception $exception
-     *
-     * @return string
-     */
     protected function buildErrorMessage(Exception $exception): string
     {
         $message = '';

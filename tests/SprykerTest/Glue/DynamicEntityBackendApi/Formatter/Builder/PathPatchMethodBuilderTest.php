@@ -43,9 +43,6 @@ class PathPatchMethodBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithRoutePrefix(): void
     {
         // Arrange
@@ -67,9 +64,6 @@ class PathPatchMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPatchPathDataWithRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithOneChildRelation(): void
     {
         // Arrange
@@ -91,9 +85,6 @@ class PathPatchMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPatchPathDataWithChildRelation.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithChildRelations(): void
     {
         // Arrange
@@ -115,9 +106,6 @@ class PathPatchMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPatchPathDataWithChildRelations.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithOneChildRelationsTree(): void
     {
         // Arrange
@@ -139,9 +127,6 @@ class PathPatchMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPatchPathDataWithChildRelationsTree.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsNullValueException(): void
     {
         // Assert
@@ -161,9 +146,6 @@ class PathPatchMethodBuilderTest extends Unit
         $builder->buildPathData(new DynamicEntityConfigurationTransfer());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataWithChildRelationsThrowsNullValueException(): void
     {
         // Assert
@@ -186,9 +168,6 @@ class PathPatchMethodBuilderTest extends Unit
         ));
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataFormatsPathDataWithoutRoutePrefix(): void
     {
         // Arrange
@@ -209,9 +188,6 @@ class PathPatchMethodBuilderTest extends Unit
         $this->assertEquals($this->tester->getExpectedPathData('expectedPatchPathDataWithoutRoutePrefix.php', static::PATH_METHOD_NAME), $formattedPathData);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildPathDataThrowsMissingFieldDefinitionException(): void
     {
         // Assert

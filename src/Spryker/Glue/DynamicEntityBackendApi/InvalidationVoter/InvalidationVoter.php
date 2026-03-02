@@ -44,11 +44,6 @@ class InvalidationVoter implements InvalidationVoterInterface
      */
     protected DynamicEntityBackendApiToStorageFacadeInterface $storageFacade;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade
-     * @param \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig $dynamicEntityBackendApiConfig
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToStorageFacadeInterface $storageFacade
-     */
     public function __construct(
         DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade,
         DynamicEntityBackendApiConfig $dynamicEntityBackendApiConfig,
@@ -59,11 +54,6 @@ class InvalidationVoter implements InvalidationVoterInterface
         $this->storageFacade = $storageFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DocumentationInvalidationVoterRequestTransfer $documentationInvalidationVoterRequestTransfer
-     *
-     * @return bool
-     */
     public function isInvalidated(DocumentationInvalidationVoterRequestTransfer $documentationInvalidationVoterRequestTransfer): bool
     {
         $fileCreatedDateTime = $this->resolveFileCreatedDateTime();
@@ -82,11 +72,6 @@ class InvalidationVoter implements InvalidationVoterInterface
         return $this->hasUpdatedConfigurations($oldestDateTime);
     }
 
-    /**
-     * @param \DateTime $dateTime
-     *
-     * @return bool
-     */
     protected function hasUpdatedConfigurations(DateTime $dateTime): bool
     {
         $dynamicEntityConfigurationCriteriaTransfer = (new DynamicEntityConfigurationCriteriaTransfer())->setDynamicEntityConfigurationConditions(
@@ -101,9 +86,6 @@ class InvalidationVoter implements InvalidationVoterInterface
                 ->count() > 0;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     protected function resolveFileCreatedDateTime(): ?DateTime
     {
         $backendApiSchemaStorageKey = $this->dynamicEntityBackendApiConfig->getBackendApiSchemaStorageKey();
@@ -116,11 +98,6 @@ class InvalidationVoter implements InvalidationVoterInterface
         return (new DateTime())->setTimestamp($backendApiSchemaData[static::CREATED_AT]);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DocumentationInvalidationVoterRequestTransfer $documentationInvalidationVoterRequestTransfer
-     *
-     * @return \DateTime|null
-     */
     protected function resolveDateTimeFromInterval(DocumentationInvalidationVoterRequestTransfer $documentationInvalidationVoterRequestTransfer): ?DateTime
     {
         if ($documentationInvalidationVoterRequestTransfer->getInterval() === null) {

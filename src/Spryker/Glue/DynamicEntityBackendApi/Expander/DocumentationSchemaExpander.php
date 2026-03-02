@@ -37,20 +37,12 @@ class DocumentationSchemaExpander implements DocumentationSchemaExpanderInterfac
      */
     protected GlueResponseDynamicEntityMapper $responseMapper;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Processor\Reader\DynamicEntityReaderInterface $dynamicEntityReader
-     */
     public function __construct(
         DynamicEntityReaderInterface $dynamicEntityReader
     ) {
         $this->dynamicEntityReader = $dynamicEntityReader;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ApiApplicationSchemaContextTransfer $apiApplicationSchemaContextTransfer
-     *
-     * @return \Generated\Shared\Transfer\ApiApplicationSchemaContextTransfer
-     */
     public function expand(ApiApplicationSchemaContextTransfer $apiApplicationSchemaContextTransfer): ApiApplicationSchemaContextTransfer
     {
         $filteredCustomRoutes = $this->filterDynamicEntityControllerRouter($apiApplicationSchemaContextTransfer->getCustomRoutesContexts()->getArrayCopy());
@@ -62,11 +54,6 @@ class DocumentationSchemaExpander implements DocumentationSchemaExpanderInterfac
         return $apiApplicationSchemaContextTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomRoutesContextTransfer $customRouteContextTransfer
-     *
-     * @return bool
-     */
     protected function isDynamicEntityControllerRouteContext(CustomRoutesContextTransfer $customRouteContextTransfer): bool
     {
         return $customRouteContextTransfer->getDefaults()[static::CONTROLLER][0] === DynamicEntityBackendApiController::class;

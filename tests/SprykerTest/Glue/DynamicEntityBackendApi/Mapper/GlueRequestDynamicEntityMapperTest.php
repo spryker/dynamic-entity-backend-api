@@ -28,9 +28,6 @@ class GlueRequestDynamicEntityMapperTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -38,9 +35,6 @@ class GlueRequestDynamicEntityMapperTest extends Unit
         $this->factory = new DynamicEntityBackendApiFactory();
     }
 
-    /**
-     * @return void
-     */
     public function testMapperMapsIsTransactionalModeByDefault(): void
     {
         // Arrange
@@ -55,9 +49,6 @@ class GlueRequestDynamicEntityMapperTest extends Unit
         $this->assertTrue($dynamicEntityCollectionRequestTransfer->getIsTransactional());
     }
 
-    /**
-     * @return void
-     */
     public function testMapperMapsNonTransactionalModeWhenHeaderIsFalseAsString(): void
     {
         // Arrange
@@ -72,9 +63,6 @@ class GlueRequestDynamicEntityMapperTest extends Unit
         $this->assertFalse($dynamicEntityCollectionRequestTransfer->getIsTransactional());
     }
 
-    /**
-     * @return void
-     */
     public function testMapperMapsNonTransactionalModeWhenHeaderIsZeroAsString(): void
     {
         // Arrange
@@ -89,11 +77,6 @@ class GlueRequestDynamicEntityMapperTest extends Unit
         $this->assertFalse($dynamicEntityCollectionRequestTransfer->getIsTransactional());
     }
 
-    /**
-     * @param string|null $isTransactionalHeaderValue
-     *
-     * @return \Generated\Shared\Transfer\GlueRequestTransfer
-     */
     protected function getGlueRequestTransferWithContentAndTransationalHeader(?string $isTransactionalHeaderValue = null): GlueRequestTransfer
     {
         $glueRequestTransfer = $this->tester->haveGlueRequestTransfer();

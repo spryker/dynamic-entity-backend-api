@@ -21,9 +21,6 @@ class DynamicEntityProtectedPathCollectionExpander implements DynamicEntityProte
      */
     protected DynamicEntityBackendApiConfig $dynamicEntityBackendApiConfig;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig $dynamicEntityBackendApiConfig
-     */
     public function __construct(DynamicEntityBackendApiConfig $dynamicEntityBackendApiConfig)
     {
         $this->dynamicEntityBackendApiConfig = $dynamicEntityBackendApiConfig;

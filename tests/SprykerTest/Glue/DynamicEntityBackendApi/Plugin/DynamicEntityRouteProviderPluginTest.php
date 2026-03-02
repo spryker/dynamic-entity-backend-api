@@ -158,9 +158,6 @@ class DynamicEntityRouteProviderPluginTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function createFooEntity(): void
     {
         (new SpyDynamicEntityConfiguration())
@@ -171,12 +168,6 @@ class DynamicEntityRouteProviderPluginTest extends Unit
             ->save();
     }
 
-    /**
-     * @param string $routeNamePlaceholder
-     * @param string $method
-     *
-     * @return string
-     */
     protected function buildRouteName(string $routeNamePlaceholder, string $method): string
     {
         return sprintf($routeNamePlaceholder, $method);

@@ -219,11 +219,6 @@ class PathGetMethodBuilder extends AbstractPathMethodBuilder implements PathMeth
         return $includeParameterFormattedData;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function buildIncludeParameterDescription(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         $description = sprintf(
@@ -250,11 +245,6 @@ class PathGetMethodBuilder extends AbstractPathMethodBuilder implements PathMeth
         return $includeEnums;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function buildIncludeParameterExample(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         $includeEnums = $this->buildIncludeParameterEnum($dynamicEntityConfigurationTransfer);

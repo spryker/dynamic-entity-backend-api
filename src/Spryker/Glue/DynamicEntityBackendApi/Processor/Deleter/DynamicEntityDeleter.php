@@ -39,12 +39,6 @@ class DynamicEntityDeleter implements DynamicEntityDeleterInterface
      */
     protected DynamicEntityBackendApiLoggerInterface $logger;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Mapper\GlueRequestDynamicEntityMapper $requestMapper
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Mapper\GlueResponseDynamicEntityMapper $responseMapper
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Logger\DynamicEntityBackendApiLoggerInterface $logger
-     */
     public function __construct(
         DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade,
         GlueRequestDynamicEntityMapper $requestMapper,

@@ -99,11 +99,6 @@ class PathPostMethodBuilder extends AbstractPathMethodBuilder implements PathMet
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function getSaveRequestDescription(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         return sprintf('%s %s', static::DESCRIPTION_REQUEST_BODY, $this->getRequestDescription($dynamicEntityConfigurationTransfer));

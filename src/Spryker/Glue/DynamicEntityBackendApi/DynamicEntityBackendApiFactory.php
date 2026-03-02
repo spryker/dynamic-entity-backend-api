@@ -61,25 +61,16 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
      */
     protected const LOGGER_NAME = 'dynamicEntityLogger';
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface
-     */
     public function getDynamicEntityFacade(): DynamicEntityBackendApiToDynamicEntityFacadeInterface
     {
         return $this->getProvidedDependency(DynamicEntityBackendApiDependencyProvider::FACADE_DYNAMIC_ENTITY);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Dependency\Service\DynamicEntityBackendApiToUtilEncodingServiceInterface
-     */
     public function getServiceUtilEncoding(): DynamicEntityBackendApiToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(DynamicEntityBackendApiDependencyProvider::SERVICE_UTIL_ENCODING);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Processor\Reader\DynamicEntityReaderInterface
-     */
     public function createDynamicEntityReader(): DynamicEntityReaderInterface
     {
         return new DynamicEntityReader(
@@ -90,9 +81,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Processor\Creator\DynamicEntityCreatorInterface
-     */
     public function createDynamicEntityCreator(): DynamicEntityCreatorInterface
     {
         return new DynamicEntityCreator(
@@ -103,9 +91,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Processor\Updater\DynamicEntityUpdaterInterface
-     */
     public function createDynamicEntityUpdater(): DynamicEntityUpdaterInterface
     {
         return new DynamicEntityUpdater(
@@ -116,9 +101,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Mapper\GlueRequestDynamicEntityMapper
-     */
     public function createGlueRequestDynamicEntityMapper(): GlueRequestDynamicEntityMapper
     {
         return new GlueRequestDynamicEntityMapper(
@@ -127,9 +109,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Mapper\GlueResponseDynamicEntityMapper
-     */
     public function createGlueResponseDynamicEntityMapper(): GlueResponseDynamicEntityMapper
     {
         return new GlueResponseDynamicEntityMapper(
@@ -139,9 +118,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Builder\Route\RouteBuilderInterface
-     */
     public function createRouteBuilder(): RouteBuilderInterface
     {
         return new RouteBuilder(
@@ -150,25 +126,16 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Dependency\Client\DynamicEntityBackendApiToGlossaryStorageClientInterface
-     */
     public function getGlossaryStorageClient(): DynamicEntityBackendApiToGlossaryStorageClientInterface
     {
         return $this->getProvidedDependency(DynamicEntityBackendApiDependencyProvider::CLIENT_GLOSSARY_STORAGE);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToLocaleFacadeInterface
-     */
     public function getLocaleFacade(): DynamicEntityBackendApiToLocaleFacadeInterface
     {
         return $this->getProvidedDependency(DynamicEntityBackendApiDependencyProvider::FACADE_LOCALE);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Logger\DynamicEntityBackendApiLoggerInterface
-     */
     public function createDynamicEntityLogger(): DynamicEntityBackendApiLoggerInterface
     {
         return new DynamicEntityBackendApiLogger(
@@ -176,17 +143,11 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Expander\DocumentationSchemaExpanderInterface
-     */
     public function createDocumentationSchemaExpander(): DocumentationSchemaExpanderInterface
     {
         return new DocumentationSchemaExpander($this->createDynamicEntityReader());
     }
 
-    /**
-     * @return \Psr\Log\LoggerInterface|null
-     */
     public function createLogger(): ?LoggerInterface
     {
         if (!$this->getConfig()->isLoggingEnabled()) {
@@ -198,9 +159,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         ]);
     }
 
-    /**
-     * @return \Monolog\Handler\HandlerInterface
-     */
     public function createBufferedStreamHandler(): HandlerInterface
     {
         return new BufferHandler(
@@ -208,25 +166,16 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Monolog\Handler\HandlerInterface
-     */
     public function createStreamHandler(): HandlerInterface
     {
         return new StreamHandler($this->getConfig()->getLogFilepath());
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Expander\DynamicEntityProtectedPathCollectionExpanderInterface
-     */
     public function createDynamicEntityProtectedPathCollectionExpander(): DynamicEntityProtectedPathCollectionExpanderInterface
     {
         return new DynamicEntityProtectedPathCollectionExpander($this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\DynamicApiPathMethodFormatterInterface
-     */
     public function createDynamicApiPathMethodFormatter(): DynamicApiPathMethodFormatterInterface
     {
         return new DynamicApiPathMethodFormatter($this->getPathMethodBuilders());
@@ -246,9 +195,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         ];
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\PathMethodBuilderInterface
-     */
     public function createPathGetMethodBuilder(): PathMethodBuilderInterface
     {
         return new PathGetMethodBuilder(
@@ -258,9 +204,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\PathMethodBuilderInterface
-     */
     public function createPathPostMethodBuilder(): PathMethodBuilderInterface
     {
         return new PathPostMethodBuilder(
@@ -270,9 +213,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\PathMethodBuilderInterface
-     */
     public function createPathPutMethodBuilder(): PathMethodBuilderInterface
     {
         return new PathPutMethodBuilder(
@@ -282,9 +222,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\PathMethodBuilderInterface
-     */
     public function createPathPatchMethodBuilder(): PathMethodBuilderInterface
     {
         return new PathPatchMethodBuilder(
@@ -294,9 +231,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\PathMethodBuilderInterface
-     */
     public function createPathDeleteMethodBuilder(): PathMethodBuilderInterface
     {
         return new PathDeleteMethodBuilder(
@@ -306,9 +240,6 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\InvalidationVoter\InvalidationVoterInterface
-     */
     public function createInvalidationVoter(): InvalidationVoterInterface
     {
         return new InvalidationVoter(
@@ -318,33 +249,21 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToStorageFacadeInterface
-     */
     public function getStorageFacade(): DynamicEntityBackendApiToStorageFacadeInterface
     {
         return $this->getProvidedDependency(DynamicEntityBackendApiDependencyProvider::FACADE_STORAGE);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\TreeBuilder\DynamicEntityConfigurationTreeBuilderInterface
-     */
     public function createDynamicEntityConfigurationTreeBuilder(): DynamicEntityConfigurationTreeBuilderInterface
     {
         return new DynamicEntityConfigurationTreeBuilder();
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\SchemaBuilderInterface
-     */
     public function createSchemaBuilder(): SchemaBuilderInterface
     {
         return new SchemaBuilder();
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Processor\Deleter\DynamicEntityDeleterInterface
-     */
     public function createDynamicEntityDeleter(): DynamicEntityDeleterInterface
     {
         return new DynamicEntityDeleter(

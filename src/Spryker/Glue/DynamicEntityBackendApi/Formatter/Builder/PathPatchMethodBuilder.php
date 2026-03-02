@@ -152,21 +152,11 @@ class PathPatchMethodBuilder extends AbstractPathMethodBuilder implements PathMe
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function getEntityRequestDescription(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         return sprintf('%s %s', static::REQUEST_DATA_UPDATE_ENTITY_DESCRIPTION, $this->getRequestDescription($dynamicEntityConfigurationTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function getCollectionRequestDescription(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         return sprintf('%s %s', static::REQUEST_DATA_UPDATE_COLLECTION_DESCRIPTION, $this->getRequestDescription($dynamicEntityConfigurationTransfer));

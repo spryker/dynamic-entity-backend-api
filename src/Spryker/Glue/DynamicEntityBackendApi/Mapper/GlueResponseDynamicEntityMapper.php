@@ -245,11 +245,6 @@ class GlueResponseDynamicEntityMapper
      */
     protected DynamicEntityBackendApiToLocaleFacadeInterface $localeFacade;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Service\DynamicEntityBackendApiToUtilEncodingServiceInterface $serviceUtilEncoding
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Client\DynamicEntityBackendApiToGlossaryStorageClientInterface $glossaryStorageClient
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToLocaleFacadeInterface $localeFacade
-     */
     public function __construct(
         DynamicEntityBackendApiToUtilEncodingServiceInterface $serviceUtilEncoding,
         DynamicEntityBackendApiToGlossaryStorageClientInterface $glossaryStorageClient,
@@ -260,13 +255,6 @@ class GlueResponseDynamicEntityMapper
         $this->localeFacade = $localeFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionTransfer $dynamicEntityCollectionTransfer
-     * @param string $tableAlias
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     public function mapDynamicEntityCollectionTransferToGlueResponseTransfer(
         DynamicEntityCollectionTransfer $dynamicEntityCollectionTransfer,
         string $tableAlias,
@@ -303,13 +291,6 @@ class GlueResponseDynamicEntityMapper
         return $glueResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionResponseTransfer $dynamicEntityCollectionResponseTransfer
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionRequestTransfer $dynamicEntityCollectionRequestTransfer
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer|null $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     public function mapDynamicEntityCollectionResponseTransferToGlueResponseTransfer(
         DynamicEntityCollectionResponseTransfer $dynamicEntityCollectionResponseTransfer,
         DynamicEntityCollectionRequestTransfer $dynamicEntityCollectionRequestTransfer,
@@ -341,13 +322,6 @@ class GlueResponseDynamicEntityMapper
         return $glueResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionResponseTransfer $dynamicEntityCollectionResponseTransfer
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionRequestTransfer $dynamicEntityCollectionRequestTransfer
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer|null $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     public function mapNonTransactionalDynamicEntityCollectionResponseTransferToGlueResponseTransfer(
         DynamicEntityCollectionResponseTransfer $dynamicEntityCollectionResponseTransfer,
         DynamicEntityCollectionRequestTransfer $dynamicEntityCollectionRequestTransfer,
@@ -462,9 +436,6 @@ class GlueResponseDynamicEntityMapper
         return $errorCollection;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     protected function createGlueResponseTransfer(): GlueResponseTransfer
     {
         $glueResponseTransfer = new GlueResponseTransfer();
@@ -473,12 +444,6 @@ class GlueResponseDynamicEntityMapper
         return $glueResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityTransfer $dynamicEntityTransfer
-     * @param string $tableAlias
-     *
-     * @return \Generated\Shared\Transfer\GlueResourceTransfer
-     */
     protected function createGlueResourceTransfer(DynamicEntityTransfer $dynamicEntityTransfer, string $tableAlias): GlueResourceTransfer
     {
         $dynamicEntityAttributesTransfer = new DynamicEntityAttributes();
@@ -641,12 +606,6 @@ class GlueResponseDynamicEntityMapper
         return $fields;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueResponseTransfer $glueResponseTransfer
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionResponseTransfer $dynamicEntityCollectionResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
-     */
     protected function setHttpStatusCodeForNonTransactionalResponse(
         GlueResponseTransfer $glueResponseTransfer,
         DynamicEntityCollectionResponseTransfer $dynamicEntityCollectionResponseTransfer
@@ -665,11 +624,6 @@ class GlueResponseDynamicEntityMapper
         return $glueResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return bool
-     */
     protected function isRequestedApplicationJson(GlueRequestTransfer $glueRequestTransfer): bool
     {
         return strpos($glueRequestTransfer->getRequestedFormatOrFail(), static::CONTENT_TYPE_APP_JSON) !== false;

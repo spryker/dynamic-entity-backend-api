@@ -34,9 +34,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testIsInvalidatedWillReturnFalse(): void
     {
         // Arrange
@@ -58,9 +55,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $this->assertFalse($isInvalidated);
     }
 
-    /**
-     * @return void
-     */
     public function testIsInvalidatedWillReturnTrue(): void
     {
         // Arrange
@@ -81,9 +75,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $this->assertTrue($isInvalidated);
     }
 
-    /**
-     * @return void
-     */
     public function testIsInvalidatedWithIntervalAsEmptyStringWillThrowException(): void
     {
         //Assert
@@ -92,9 +83,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $this->runIsInvalidatedWithIntervalAsEmptyString();
     }
 
-    /**
-     * @return void
-     */
     public function testIsInvalidatedWillCallException(): void
     {
         // Assert
@@ -103,9 +91,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $this->runIsInvalidatedWithIntervalAsUnexpectedCharacter();
     }
 
-    /**
-     * @return void
-     */
     public function testIsInvalidatedWithIntervalGreaterThanFileTime(): void
     {
         // Arrange
@@ -127,9 +112,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $this->assertTrue($isInvalidated);
     }
 
-    /**
-     * @return void
-     */
     public function testIsInvalidatedWithNullInterval(): void
     {
         // Arrange
@@ -150,9 +132,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $this->assertTrue($isInvalidated);
     }
 
-    /**
-     * @return \Spryker\Glue\DynamicEntityBackendApi\Plugin\DocumentationGeneratorApi\DynamicEntityDocumentationInvalidationVoterPlugin
-     */
     protected function createDynamicEntityDocumentationInvalidationVoterPlugin(): DynamicEntityDocumentationInvalidationVoterPlugin
     {
         return new DynamicEntityDocumentationInvalidationVoterPlugin();
@@ -187,9 +166,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         return $storageFacadeMock;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationCollectionTransfer
-     */
     protected function getDynamicEntityConfigurationCollectionTransfer(): DynamicEntityConfigurationCollectionTransfer
     {
         return (new DynamicEntityConfigurationCollectionTransfer())
@@ -197,9 +173,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
             ->addDynamicEntityConfiguration((new DynamicEntityConfigurationTransfer())->setTableAlias('/resource-2'));
     }
 
-    /**
-     * @return void
-     */
     protected function runIsInvalidatedWithIntervalAsEmptyString(): void
     {
         // Arrange
@@ -222,9 +195,6 @@ class DynamicEntityDocumentationInvalidationVoterPluginTest extends Unit
         $dynamicEntityDocumentationInvalidationVoterPlugin->isInvalidated($documentationInvalidationVoterRequestTransfer);
     }
 
-    /**
-     * @return void
-     */
     protected function runIsInvalidatedWithIntervalAsUnexpectedCharacter(): void
     {
         // Arrange

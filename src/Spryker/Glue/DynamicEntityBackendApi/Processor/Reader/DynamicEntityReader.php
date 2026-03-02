@@ -42,12 +42,6 @@ class DynamicEntityReader implements DynamicEntityReaderInterface
      */
     protected DynamicEntityBackendApiLoggerInterface $logger;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Mapper\GlueRequestDynamicEntityMapper $requestMapper
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Mapper\GlueResponseDynamicEntityMapper $responseMapper
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Logger\DynamicEntityBackendApiLoggerInterface $logger
-     */
     public function __construct(
         DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade,
         GlueRequestDynamicEntityMapper $requestMapper,
@@ -209,9 +203,6 @@ class DynamicEntityReader implements DynamicEntityReaderInterface
         return $newRelations === [] ? $dynamicEntityConfiguration : $dynamicEntityConfiguration->setChildRelations(new ArrayObject($newRelations));
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DynamicEntityConfigurationCriteriaTransfer
-     */
     protected function createDynamicEntityConfigurationCriteriaTransfer(): DynamicEntityConfigurationCriteriaTransfer
     {
         $dynamicEntityConfigurationCriteriaTransfer = new DynamicEntityConfigurationCriteriaTransfer();

@@ -11,10 +11,5 @@ use Symfony\Component\Routing\RouteCollection;
 
 interface RouteBuilderInterface
 {
-    /**
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     public function buildRouteCollection(RouteCollection $routeCollection): RouteCollection;
 }

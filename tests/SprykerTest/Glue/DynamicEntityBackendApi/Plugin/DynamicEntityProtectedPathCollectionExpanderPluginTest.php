@@ -38,18 +38,12 @@ class DynamicEntityProtectedPathCollectionExpanderPluginTest extends Unit
      */
     protected string $routePrefix;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->dynamicEntityProtectedPathCollectionExpanderPlugin = new DynamicEntityProtectedPathCollectionExpanderPlugin();
         $this->routePrefix = (new DynamicEntityBackendApiConfig())->getRoutePrefix();
     }
 
-    /**
-     * @return void
-     */
     public function testExpandWithEmptyCollection(): void
     {
         // Arrange
@@ -69,9 +63,6 @@ class DynamicEntityProtectedPathCollectionExpanderPluginTest extends Unit
         $this->assertEquals(0, preg_match($protectedPathPattern, $wrongEndpoint));
     }
 
-    /**
-     * @return void
-     */
     public function testExpandWithNonEmptyCollection(): void
     {
         // Arrange
@@ -92,9 +83,6 @@ class DynamicEntityProtectedPathCollectionExpanderPluginTest extends Unit
         $this->assertEquals($expectedResult, $protectedPathCollection);
     }
 
-    /**
-     * @return void
-     */
     public function testExpandWithEmptyCollections(): void
     {
         // Arrange

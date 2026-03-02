@@ -47,22 +47,12 @@ class GlueRequestDynamicEntityMapper
      */
     protected DynamicEntityBackendApiConfig $config;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Dependency\Service\DynamicEntityBackendApiToUtilEncodingServiceInterface $serviceUtilEncoding
-     * @param \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig $config
-     */
     public function __construct(DynamicEntityBackendApiToUtilEncodingServiceInterface $serviceUtilEncoding, DynamicEntityBackendApiConfig $config)
     {
         $this->serviceUtilEncoding = $serviceUtilEncoding;
         $this->config = $config;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     * @param string|null $id
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityCriteriaTransfer
-     */
     public function mapGlueRequestToDynamicEntityCriteriaTransfer(
         GlueRequestTransfer $glueRequestTransfer,
         ?string $id = null
@@ -87,12 +77,6 @@ class GlueRequestDynamicEntityMapper
         return $dynamicEntityCriteriaTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     * @param \Generated\Shared\Transfer\DynamicEntityCollectionDeleteCriteriaTransfer $dynamicEntityCollectionDeleteCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityCollectionDeleteCriteriaTransfer
-     */
     public function mapGlueRequestTransferToDynamicEntityCollectionDeleteCriteriaTransfer(
         GlueRequestTransfer $glueRequestTransfer,
         DynamicEntityCollectionDeleteCriteriaTransfer $dynamicEntityCollectionDeleteCriteriaTransfer
@@ -106,11 +90,6 @@ class GlueRequestDynamicEntityMapper
             ->setDynamicEntityConditions($dynamicEntityConditionsTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityCollectionRequestTransfer|null
-     */
     public function mapGlueRequestToDynamicEntityCollectionRequestTransfer(
         GlueRequestTransfer $glueRequestTransfer
     ): ?DynamicEntityCollectionRequestTransfer {
@@ -135,11 +114,6 @@ class GlueRequestDynamicEntityMapper
         return $this->mapContentForCollectionRequest($dataCollection, $dynamicEntityCollectionRequestTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityCollectionRequestTransfer
-     */
     protected function createDynamicEntityCollectionRequestTransfer(GlueRequestTransfer $glueRequestTransfer): DynamicEntityCollectionRequestTransfer
     {
         $dynamicEntityCollectionRequestTransfer = (new DynamicEntityCollectionRequestTransfer())
@@ -277,12 +251,6 @@ class GlueRequestDynamicEntityMapper
         return $dynamicEntityTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     * @param string|null $id
-     *
-     * @return \Generated\Shared\Transfer\DynamicEntityConditionsTransfer
-     */
     protected function createDynamicEntityConditionsTransfer(
         GlueRequestTransfer $glueRequestTransfer,
         ?string $id = null
@@ -309,11 +277,6 @@ class GlueRequestDynamicEntityMapper
         return $dynamicEntityConditionsTransfer;
     }
 
-    /**
-     * @param string $string
-     *
-     * @return string|null
-     */
     protected function extractTableAlias(string $string): ?string
     {
         $matches = [];
@@ -335,11 +298,6 @@ class GlueRequestDynamicEntityMapper
         return array_keys($array) !== range(0, count($array) - 1);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PaginationTransfer|null $paginationTransfer
-     *
-     * @return \Generated\Shared\Transfer\PaginationTransfer
-     */
     protected function setDefaultPaginationLimit(?PaginationTransfer $paginationTransfer): PaginationTransfer
     {
         if ($paginationTransfer === null) {
@@ -356,11 +314,6 @@ class GlueRequestDynamicEntityMapper
         return $paginationTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     *
-     * @return bool
-     */
     protected function isTransactionalRequest(GlueRequestTransfer $glueRequestTransfer): bool
     {
         $transactionalHeader = strtolower($this->config->getTransactionalHeader());

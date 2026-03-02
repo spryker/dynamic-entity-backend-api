@@ -33,11 +33,6 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
      */
     abstract public function buildPathData(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): array;
 
-    /**
-     * @param \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig $config
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Formatter\TreeBuilder\DynamicEntityConfigurationTreeBuilderInterface $treeBuilder
-     * @param \Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\SchemaBuilderInterface $schemaBuilder
-     */
     public function __construct(
         protected DynamicEntityBackendApiConfig $config,
         protected DynamicEntityConfigurationTreeBuilderInterface $treeBuilder,
@@ -280,22 +275,11 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
         return $propertyDefinition;
     }
 
-    /**
-     * @param string $placeholder
-     * @param string $resourceName
-     *
-     * @return string
-     */
     protected function formatPath(string $placeholder, string $resourceName): string
     {
         return str_replace('//', '/', sprintf($placeholder, $this->config->getRoutePrefix(), $resourceName));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function getTag(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         return sprintf('dynamic-entity-%s', $dynamicEntityConfigurationTransfer->getTableAliasOrFail());
@@ -559,21 +543,11 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
         ];
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return bool
-     */
     protected function haveChildRelations(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): bool
     {
         return $dynamicEntityConfigurationTransfer->getChildRelations()->count() > 0;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer
-     *
-     * @return string
-     */
     protected function getRequestDescription(DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer): string
     {
         if (!$this->haveChildRelations($dynamicEntityConfigurationTransfer)) {
@@ -723,11 +697,6 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
         return $fieldSchema;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityFieldDefinitionTransfer $dynamicEntityFieldDefinitionTransfer
-     *
-     * @return string
-     */
     protected function generatePropertyDescription(DynamicEntityFieldDefinitionTransfer $dynamicEntityFieldDefinitionTransfer): string
     {
         $fieldName = $dynamicEntityFieldDefinitionTransfer->getFieldVisibleNameOrFail();
@@ -756,11 +725,6 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
         return $description;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DynamicEntityFieldDefinitionTransfer $fieldDefinition
-     *
-     * @return string|null
-     */
     protected function generatePropertyExample(DynamicEntityFieldDefinitionTransfer $fieldDefinition): ?string
     {
         $type = $fieldDefinition->getTypeOrFail();
@@ -788,11 +752,6 @@ abstract class AbstractPathMethodBuilder implements PathMethodBuilderInterface
         }
     }
 
-    /**
-     * @param string $fieldName
-     *
-     * @return string|null
-     */
     protected function generateStringExample(string $fieldName): ?string
     {
         $lowerFieldName = strtolower($fieldName);
