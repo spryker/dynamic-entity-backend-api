@@ -106,6 +106,7 @@ class DynamicEntityBackendApiControllerTest extends Unit
     {
         parent::setUp();
 
+        $this->tester->mockLocale();
         $this->controller = new DynamicEntityBackendApiController();
         $this->tester->setupStorageRedisConfig();
     }

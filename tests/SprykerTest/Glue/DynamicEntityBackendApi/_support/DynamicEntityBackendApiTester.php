@@ -11,6 +11,7 @@ namespace SprykerTest\Glue\DynamicEntityBackendApi;
 
 use ArrayObject;
 use Codeception\Actor;
+use Codeception\Stub;
 use Generated\Shared\Transfer\DynamicEntityConfigurationRelationTransfer;
 use Generated\Shared\Transfer\DynamicEntityConfigurationTransfer;
 use Generated\Shared\Transfer\DynamicEntityDefinitionTransfer;
@@ -18,7 +19,9 @@ use Generated\Shared\Transfer\DynamicEntityFieldDefinitionTransfer;
 use Generated\Shared\Transfer\DynamicEntityFieldValidationTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Generated\Shared\Transfer\GlueResourceTransfer;
+use Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToLocaleFacadeInterface;
 use Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig;
+use Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiDependencyProvider;
 use Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiFactory;
 use Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\SchemaBuilder;
 use Spryker\Glue\DynamicEntityBackendApi\Formatter\Builder\SchemaBuilderInterface;
@@ -173,6 +176,14 @@ class DynamicEntityBackendApiTester extends Actor
         ]);
 
         return $glueRequestTransfer;
+    }
+
+    public function mockLocale(string $locale = 'en_US'): void
+    {
+        $mockLocale = Stub::makeEmpty(DynamicEntityBackendApiToLocaleFacadeInterface::class);
+        $mockLocale->method('getCurrentLocaleName')->willReturn($locale);
+
+        $this->setDependency(DynamicEntityBackendApiDependencyProvider::FACADE_LOCALE, $mockLocale);
     }
 
     public function buildDefinitionWithNonAutoIncrementedId(
