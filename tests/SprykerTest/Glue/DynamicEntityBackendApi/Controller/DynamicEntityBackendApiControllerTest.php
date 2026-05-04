@@ -75,7 +75,7 @@ class DynamicEntityBackendApiControllerTest extends Unit
     /**
      * @var string
      */
-    protected const ERROR_INVALID_DATA_FORMAT = 'Invalid or missing data format. Please ensure that the data is provided in the correct format. Example request body: {\'data\':[{...},{...},..]}';
+    protected const ERROR_INVALID_DATA_FORMAT = 'Invalid or missing data format. Please ensure that the data is provided in the correct format. Example request body: {"data":[{...},{...},..]}';
 
     /**
      * @var string
