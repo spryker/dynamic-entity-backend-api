@@ -120,10 +120,7 @@ class DynamicEntityBackendApiFactory extends AbstractBackendApiFactory
 
     public function createRouteBuilder(): RouteBuilderInterface
     {
-        return new RouteBuilder(
-            $this->getDynamicEntityFacade(),
-            $this->getConfig(),
-        );
+        return new RouteBuilder($this->getConfig());
     }
 
     public function getGlossaryStorageClient(): DynamicEntityBackendApiToGlossaryStorageClientInterface

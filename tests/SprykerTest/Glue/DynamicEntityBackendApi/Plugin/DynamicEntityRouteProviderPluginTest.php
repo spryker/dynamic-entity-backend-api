@@ -8,7 +8,6 @@
 namespace SprykerTest\Glue\DynamicEntityBackendApi\Plugin;
 
 use Codeception\Test\Unit;
-use Orm\Zed\DynamicEntity\Persistence\SpyDynamicEntityConfiguration;
 use Spryker\Glue\DynamicEntityBackendApi\Plugin\GlueApplication\DynamicEntityRouteProviderPlugin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouteCollection;
@@ -33,22 +32,12 @@ class DynamicEntityRouteProviderPluginTest extends Unit
     /**
      * @var string
      */
-    protected const COLLECTION_PATH = '/dynamic-entity/foo';
+    protected const COLLECTION_PATH = '/dynamic-entity/{resourceName}';
 
     /**
      * @var string
      */
-    protected const BY_ID_PATH = '/dynamic-entity/foo/{id}';
-
-    /**
-     * @var string
-     */
-    protected const ROUTE_NAME = 'foo%s';
-
-    /**
-     * @var string
-     */
-    protected const ROUTE_NAME_COLLECTION = 'fooCollection%s';
+    protected const BY_ID_PATH = '/dynamic-entity/{resourceName}/{id}';
 
     /**
      * @var string
@@ -78,6 +67,11 @@ class DynamicEntityRouteProviderPluginTest extends Unit
     /**
      * @var string
      */
+    protected const DELETE_ACTION = 'deleteAction';
+
+    /**
+     * @var string
+     */
     protected const CONTROLLER = '_controller';
 
     /**
@@ -98,7 +92,6 @@ class DynamicEntityRouteProviderPluginTest extends Unit
     public function testDynamicEntityRouteProviderPluginAddsRoutes(string $routeName, string $path, string $method, string $action): void
     {
         //Arrange
-        $this->createFooEntity();
         $dynamicEntityRouteProviderPlugin = new DynamicEntityRouteProviderPlugin();
         $routeCollection = new RouteCollection();
 
@@ -119,57 +112,15 @@ class DynamicEntityRouteProviderPluginTest extends Unit
     protected function routeDataProvider(): array
     {
         return [
-            [
-                $this->buildRouteName(static::ROUTE_NAME_COLLECTION, Request::METHOD_GET),
-                static::COLLECTION_PATH,
-                Request::METHOD_GET,
-                static::GET_COLLECTION_ACTION,
-            ], [
-                $this->buildRouteName(static::ROUTE_NAME, Request::METHOD_GET),
-                static::BY_ID_PATH,
-                Request::METHOD_GET,
-                static::GET_ACTION,
-            ], [
-                $this->buildRouteName(static::ROUTE_NAME, Request::METHOD_POST),
-                static::COLLECTION_PATH,
-                Request::METHOD_POST,
-                static::POST_ACTION,
-            ], [
-                $this->buildRouteName(static::ROUTE_NAME_COLLECTION, Request::METHOD_PATCH),
-                static::COLLECTION_PATH,
-                Request::METHOD_PATCH,
-                static::PATCH_ACTION,
-            ], [
-                $this->buildRouteName(static::ROUTE_NAME, Request::METHOD_PATCH),
-                static::BY_ID_PATH,
-                Request::METHOD_PATCH,
-                static::PATCH_ACTION,
-            ], [
-                $this->buildRouteName(static::ROUTE_NAME_COLLECTION, Request::METHOD_PUT),
-                static::COLLECTION_PATH,
-                Request::METHOD_PUT,
-                static::PUT_ACTION,
-            ], [
-                $this->buildRouteName(static::ROUTE_NAME, Request::METHOD_PUT),
-                static::BY_ID_PATH,
-                Request::METHOD_PUT,
-                static::PUT_ACTION,
-            ],
+            ['dynamicEntityCollectionGET', static::COLLECTION_PATH, Request::METHOD_GET, static::GET_COLLECTION_ACTION],
+            ['dynamicEntityCollectionPOST', static::COLLECTION_PATH, Request::METHOD_POST, static::POST_ACTION],
+            ['dynamicEntityCollectionPATCH', static::COLLECTION_PATH, Request::METHOD_PATCH, static::PATCH_ACTION],
+            ['dynamicEntityCollectionPUT', static::COLLECTION_PATH, Request::METHOD_PUT, static::PUT_ACTION],
+            ['dynamicEntityCollectionDELETE', static::COLLECTION_PATH, Request::METHOD_DELETE, static::DELETE_ACTION],
+            ['dynamicEntityGET', static::BY_ID_PATH, Request::METHOD_GET, static::GET_ACTION],
+            ['dynamicEntityPATCH', static::BY_ID_PATH, Request::METHOD_PATCH, static::PATCH_ACTION],
+            ['dynamicEntityPUT', static::BY_ID_PATH, Request::METHOD_PUT, static::PUT_ACTION],
+            ['dynamicEntityDELETE', static::BY_ID_PATH, Request::METHOD_DELETE, static::DELETE_ACTION],
         ];
-    }
-
-    protected function createFooEntity(): void
-    {
-        (new SpyDynamicEntityConfiguration())
-            ->setIsActive(true)
-            ->setTableAlias($this->tester::FOO_TABLE_ALIAS)
-            ->setTableName($this->tester::TABLE_NAME)
-            ->setDefinition($this->tester->buildDefinitionWithNonAutoIncrementedId())
-            ->save();
-    }
-
-    protected function buildRouteName(string $routeNamePlaceholder, string $method): string
-    {
-        return sprintf($routeNamePlaceholder, $method);
     }
 }

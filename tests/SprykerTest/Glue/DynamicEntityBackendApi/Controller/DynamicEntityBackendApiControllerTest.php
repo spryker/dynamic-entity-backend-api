@@ -30,7 +30,7 @@ class DynamicEntityBackendApiControllerTest extends Unit
     /**
      * @var string
      */
-    protected const RESPONSE_CODE_ALIAS_IS_WRONG = '1312';
+    protected const RESPONSE_CODE_ALIAS_IS_WRONG = '007';
 
     /**
      * @var string

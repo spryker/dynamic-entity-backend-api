@@ -220,6 +220,10 @@ class GlueResponseDynamicEntityMapper
      */
     protected const RESPONSE_CODE_METHOD_NOT_ALLOWED = 1318;
 
+    protected const string RESPONSE_CODE_RESOURCE_NOT_FOUND = '007';
+
+    protected const string ERROR_MESSAGE_RESOURCE_NOT_FOUND = 'Not found';
+
     /**
      * @var string
      */
@@ -355,13 +359,13 @@ class GlueResponseDynamicEntityMapper
         GlueResponseTransfer $glueResponseTransfer,
         array $parameters = []
     ): GlueResponseTransfer {
-        $errorMessage = $this->glossaryStorageClient->translate(
+        $errorDataIndexedByGlossaryKey = $this->getErrorDataIndexedByGlossaryKey()[$message];
+
+        $errorMessage = $errorDataIndexedByGlossaryKey[GlueErrorTransfer::MESSAGE] ?? $this->glossaryStorageClient->translate(
             $message,
             $this->localeFacade->getCurrentLocaleName(),
             $parameters,
         );
-
-        $errorDataIndexedByGlossaryKey = $this->getErrorDataIndexedByGlossaryKey()[$message];
 
         $glueResponseTransfer->setHttpStatus($errorDataIndexedByGlossaryKey[GlueErrorTransfer::STATUS]);
         $glueResponseTransfer->addError(
@@ -418,13 +422,13 @@ class GlueResponseDynamicEntityMapper
         $errorCollection = [];
 
         foreach ($dynamicEntityCollectionResponseTransfer->getErrors() as $errorTransfer) {
-            $errorMessage = $this->glossaryStorageClient->translate(
+            $errorDataIndexedByGlossaryKey = $this->getErrorDataIndexedByGlossaryKey()[$errorTransfer->getMessageOrFail()];
+
+            $errorMessage = $errorDataIndexedByGlossaryKey[GlueErrorTransfer::MESSAGE] ?? $this->glossaryStorageClient->translate(
                 $errorTransfer->getMessageOrFail(),
                 $this->localeFacade->getCurrentLocaleName(),
                 $errorTransfer->getParameters(),
             );
-
-            $errorDataIndexedByGlossaryKey = $this->getErrorDataIndexedByGlossaryKey()[$errorTransfer->getMessageOrFail()];
 
             $errorCollection[] = [
                 static::ERROR_KEY_CODE => (string)$errorDataIndexedByGlossaryKey[GlueErrorTransfer::CODE],
@@ -522,8 +526,9 @@ class GlueResponseDynamicEntityMapper
                 GlueErrorTransfer::CODE => static::RESPONSE_CODE_ENTITY_NOT_PERSISTED_DUPLICATE_ENTRY,
             ],
             static::GLOSSARY_KEY_CONFIGURATION_NOT_FOUND => [
-                GlueErrorTransfer::STATUS => Response::HTTP_BAD_REQUEST,
-                GlueErrorTransfer::CODE => static::RESPONSE_CODE_CONFIGURATION_NOT_FOUND,
+                GlueErrorTransfer::STATUS => Response::HTTP_NOT_FOUND,
+                GlueErrorTransfer::CODE => static::RESPONSE_CODE_RESOURCE_NOT_FOUND,
+                GlueErrorTransfer::MESSAGE => static::ERROR_MESSAGE_RESOURCE_NOT_FOUND,
             ],
             static::GLOSSARY_KEY_RELATION_NOT_FOUND => [
                 GlueErrorTransfer::STATUS => Response::HTTP_BAD_REQUEST,

@@ -7,11 +7,7 @@
 
 namespace Spryker\Glue\DynamicEntityBackendApi\Builder\Route;
 
-use Generated\Shared\Transfer\DynamicEntityConfigurationConditionsTransfer;
-use Generated\Shared\Transfer\DynamicEntityConfigurationCriteriaTransfer;
-use Generated\Shared\Transfer\DynamicEntityConfigurationTransfer;
 use Spryker\Glue\DynamicEntityBackendApi\Controller\DynamicEntityBackendApiController;
-use Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface;
 use Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -22,305 +18,161 @@ class RouteBuilder implements RouteBuilderInterface
     /**
      * @var string
      */
-    protected const ROUTE_COLLECTION_PATH_PLACEHOLDER = '/%s/%s';
+    protected const string ROUTE_COLLECTION_PATH_PLACEHOLDER = '/%s/{resourceName}';
 
     /**
      * @var string
      */
-    protected const ROUTE_PATH_PLACEHOLDER = '/%s/%s/{id}';
+    protected const string ROUTE_PATH_PLACEHOLDER = '/%s/{resourceName}/{id}';
 
     /**
      * @var string
      */
-    protected const ROUTE_COLLECTION_NAME_PLACEHOLDER = '%sCollection%s';
+    protected const string RESOURCE_NAME_ROUTE_PARAMETER = 'resourceName';
 
     /**
      * @var string
      */
-    protected const ROUTE_NAME_PLACEHOLDER = '%s%s';
+    protected const string RESOURCE_NAME_PATTERN = '[\w-]+';
 
     /**
      * @var string
      */
-    protected const CONTROLLER = '_controller';
+    protected const string ROUTE_NAME_COLLECTION_GET = 'dynamicEntityCollectionGET';
 
     /**
      * @var string
      */
-    protected const METHOD = '_method';
+    protected const string ROUTE_NAME_COLLECTION_POST = 'dynamicEntityCollectionPOST';
 
     /**
      * @var string
      */
-    protected const STRATEGIES_AUTHORIZATION = '_authorization_strategies';
+    protected const string ROUTE_NAME_COLLECTION_PATCH = 'dynamicEntityCollectionPATCH';
+
+    /**
+     * @var string
+     */
+    protected const string ROUTE_NAME_COLLECTION_PUT = 'dynamicEntityCollectionPUT';
+
+    /**
+     * @var string
+     */
+    protected const string ROUTE_NAME_COLLECTION_DELETE = 'dynamicEntityCollectionDELETE';
+
+    /**
+     * @var string
+     */
+    protected const string ROUTE_NAME_GET = 'dynamicEntityGET';
+
+    /**
+     * @var string
+     */
+    protected const string ROUTE_NAME_PATCH = 'dynamicEntityPATCH';
+
+    /**
+     * @var string
+     */
+    protected const string ROUTE_NAME_PUT = 'dynamicEntityPUT';
+
+    /**
+     * @var string
+     */
+    protected const string ROUTE_NAME_DELETE = 'dynamicEntityDELETE';
+
+    /**
+     * @var string
+     */
+    protected const string CONTROLLER = '_controller';
+
+    /**
+     * @var string
+     */
+    protected const string METHOD = '_method';
+
+    /**
+     * @var string
+     */
+    protected const string STRATEGIES_AUTHORIZATION = '_authorization_strategies';
 
     /**
      * @uses {@link \Spryker\Zed\ApiKeyAuthorizationConnector\Communication\Plugin\Authorization\ApiKeyAuthorizationStrategyPlugin::STRATEGY_NAME}
      *
      * @var string
      */
-    protected const STRATEGY_AUTHORIZATION_API_KEY = 'ApiKey';
+    protected const string STRATEGY_AUTHORIZATION_API_KEY = 'ApiKey';
 
     /**
      * @var string
      */
-    protected const GET_COLLECTION_ACTION = 'getCollectionAction';
+    protected const string GET_COLLECTION_ACTION = 'getCollectionAction';
 
     /**
      * @var string
      */
-    protected const GET_ACTION = 'getAction';
+    protected const string GET_ACTION = 'getAction';
 
     /**
      * @var string
      */
-    protected const POST_ACTION = 'postAction';
+    protected const string POST_ACTION = 'postAction';
 
     /**
      * @var string
      */
-    protected const PATCH_ACTION = 'patchAction';
+    protected const string PATCH_ACTION = 'patchAction';
 
     /**
      * @var string
      */
-    protected const PUT_ACTION = 'putAction';
+    protected const string PUT_ACTION = 'putAction';
 
     /**
      * @var string
      */
-    protected const DELETE_ACTION = 'deleteAction';
-
-    /**
-     * @var \Spryker\Glue\DynamicEntityBackendApi\Dependency\Facade\DynamicEntityBackendApiToDynamicEntityFacadeInterface
-     */
-    protected DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade;
+    protected const string DELETE_ACTION = 'deleteAction';
 
     /**
      * @var \Spryker\Glue\DynamicEntityBackendApi\DynamicEntityBackendApiConfig
      */
     protected DynamicEntityBackendApiConfig $config;
 
-    public function __construct(
-        DynamicEntityBackendApiToDynamicEntityFacadeInterface $dynamicEntityFacade,
-        DynamicEntityBackendApiConfig $config
-    ) {
-        $this->dynamicEntityFacade = $dynamicEntityFacade;
+    public function __construct(DynamicEntityBackendApiConfig $config)
+    {
         $this->config = $config;
     }
 
     public function buildRouteCollection(RouteCollection $routeCollection): RouteCollection
     {
-        $dynamicEntityConfigurationCollectionTransfer = $this->dynamicEntityFacade->getDynamicEntityConfigurationCollection(
-            $this->createDynamicEntityConfigurationCriteriaTransfer(),
-        );
+        $collectionPath = sprintf(static::ROUTE_COLLECTION_PATH_PLACEHOLDER, $this->config->getRoutePrefix());
+        $entityPath = sprintf(static::ROUTE_PATH_PLACEHOLDER, $this->config->getRoutePrefix());
+        $resourceConstraints = [static::RESOURCE_NAME_ROUTE_PARAMETER => static::RESOURCE_NAME_PATTERN];
 
-        foreach ($dynamicEntityConfigurationCollectionTransfer->getDynamicEntityConfigurations() as $dynamicEntityConfiguration) {
-            $routeCollection = $this->addDynamicEntityRouteForGetCollection($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForGet($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForPost($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForPatchCollection($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForPatch($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForPutCollection($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForPut($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForDelete($dynamicEntityConfiguration, $routeCollection);
-            $routeCollection = $this->addDynamicEntityRouteForDeleteCollection($dynamicEntityConfiguration, $routeCollection);
-        }
+        $routeCollection->add(static::ROUTE_NAME_COLLECTION_GET, $this->buildRoute(static::GET_COLLECTION_ACTION, Request::METHOD_GET, $collectionPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_COLLECTION_POST, $this->buildRoute(static::POST_ACTION, Request::METHOD_POST, $collectionPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_COLLECTION_PATCH, $this->buildRoute(static::PATCH_ACTION, Request::METHOD_PATCH, $collectionPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_COLLECTION_PUT, $this->buildRoute(static::PUT_ACTION, Request::METHOD_PUT, $collectionPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_COLLECTION_DELETE, $this->buildRoute(static::DELETE_ACTION, Request::METHOD_DELETE, $collectionPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_GET, $this->buildRoute(static::GET_ACTION, Request::METHOD_GET, $entityPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_PATCH, $this->buildRoute(static::PATCH_ACTION, Request::METHOD_PATCH, $entityPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_PUT, $this->buildRoute(static::PUT_ACTION, Request::METHOD_PUT, $entityPath, $resourceConstraints));
+        $routeCollection->add(static::ROUTE_NAME_DELETE, $this->buildRoute(static::DELETE_ACTION, Request::METHOD_DELETE, $entityPath, $resourceConstraints));
 
         return $routeCollection;
     }
 
-    protected function buildRoute(string $action, string $method, string $path): Route
+    /**
+     * @param array<string, string> $requirements
+     */
+    protected function buildRoute(string $action, string $method, string $path, array $requirements = []): Route
     {
         $route = new Route($path);
         $route->setDefault(static::CONTROLLER, [DynamicEntityBackendApiController::class, $action])
             ->setDefault(static::METHOD, $method)
             ->setDefault(static::STRATEGIES_AUTHORIZATION, [static::STRATEGY_AUTHORIZATION_API_KEY])
-            ->setMethods($method);
+            ->setMethods($method)
+            ->setRequirements($requirements);
 
         return $route;
-    }
-
-    protected function addDynamicEntityRouteForGetCollection(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::GET_COLLECTION_ACTION,
-            Request::METHOD_GET,
-            $this->formatPath(static::ROUTE_COLLECTION_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_COLLECTION_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_GET),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForGet(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::GET_ACTION,
-            Request::METHOD_GET,
-            $this->formatPath(static::ROUTE_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_GET),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForPost(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::POST_ACTION,
-            Request::METHOD_POST,
-            $this->formatPath(static::ROUTE_COLLECTION_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_POST),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForPatch(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::PATCH_ACTION,
-            Request::METHOD_PATCH,
-            $this->formatPath(static::ROUTE_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_PATCH),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForPatchCollection(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::PATCH_ACTION,
-            Request::METHOD_PATCH,
-            $this->formatPath(static::ROUTE_COLLECTION_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_COLLECTION_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_PATCH),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForPutCollection(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::PUT_ACTION,
-            Request::METHOD_PUT,
-            $this->formatPath(static::ROUTE_COLLECTION_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_COLLECTION_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_PUT),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForPut(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::PUT_ACTION,
-            Request::METHOD_PUT,
-            $this->formatPath(static::ROUTE_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_PUT),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForDeleteCollection(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::DELETE_ACTION,
-            Request::METHOD_DELETE,
-            $this->formatPath(static::ROUTE_COLLECTION_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_COLLECTION_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_DELETE),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function addDynamicEntityRouteForDelete(
-        DynamicEntityConfigurationTransfer $dynamicEntityConfigurationTransfer,
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute(
-            static::DELETE_ACTION,
-            Request::METHOD_DELETE,
-            $this->formatPath(static::ROUTE_PATH_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail()),
-        );
-
-        $routeCollection->add(
-            $this->formatName(static::ROUTE_NAME_PLACEHOLDER, $dynamicEntityConfigurationTransfer->getTableAliasOrFail(), Request::METHOD_DELETE),
-            $route,
-        );
-
-        return $routeCollection;
-    }
-
-    protected function formatPath(string $placeholder, string $tableAlias): string
-    {
-        return sprintf($placeholder, $this->config->getRoutePrefix(), $tableAlias);
-    }
-
-    protected function formatName(string $placeholder, string $tableAlias, ?string $method = null): string
-    {
-        return sprintf($placeholder, $tableAlias, $method);
-    }
-
-    protected function createDynamicEntityConfigurationCriteriaTransfer(): DynamicEntityConfigurationCriteriaTransfer
-    {
-        $dynamicEntityConfigurationCriteriaTransfer = new DynamicEntityConfigurationCriteriaTransfer();
-        $dynamicEntityConfigurationCriteriaTransfer->setDynamicEntityConfigurationConditions(
-            (new DynamicEntityConfigurationConditionsTransfer())
-                ->setIsActive(true),
-        );
-
-        return $dynamicEntityConfigurationCriteriaTransfer;
     }
 }
