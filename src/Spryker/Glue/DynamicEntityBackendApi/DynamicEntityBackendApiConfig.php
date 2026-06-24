@@ -12,16 +12,22 @@ use Spryker\Glue\Kernel\AbstractBundleConfig;
 class DynamicEntityBackendApiConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const GLOSSARY_KEY_ERROR_INVALID_DATA_FORMAT = 'dynamic_entity.validation.invalid_data_format';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const GLOSSARY_KEY_ERROR_ENTITY_DOES_NOT_EXIST = 'dynamic_entity.validation.entity_does_not_exist';
 
     /**
+     * @api
+     *
      * @uses \Spryker\Zed\DynamicEntity\DynamicEntityConfig:ERROR_PATH
      *
      * @var string
